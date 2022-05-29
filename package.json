@@ -1,0 +1,50 @@
+{
+	"name": "typescript-lib-template",
+	"version": "1.0.0",
+	"repository": "git@github.com:shahriar-shojib/typescript-lib-template.git",
+	"author": "Shahriar Shojib <shahriar_shojib@hotmail.com>",
+	"license": "MIT",
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"require": "./dist/index.js",
+			"import": "./dist/index.mjs",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"devDependencies": {
+		"@swc/core": "^1.2.194",
+		"@swc/jest": "^0.2.21",
+		"@types/jest": "^27.5.1",
+		"eslint": "^8.16.0",
+		"jest": "^28.1.0",
+		"prettier": "^2.6.2",
+		"tsup": "^6.0.1",
+		"typescript": "^4.7.2"
+	},
+	"scripts": {
+		"build": "tsup src/index.ts --format cjs,esm --dts --clean",
+		"watch": "npm run build -- --watch src",
+		"prepublishOnly": "npm run build",
+		"ci": "yarn --frozen-lockfile",
+		"test": "jest",
+		"lint": "eslint ./src",
+		"lint:fix": "eslint ./src --fix",
+		"format": "prettier --write ./src",
+		"prettier:check": "prettier --check ./src"
+	},
+	"jest": {
+		"moduleFileExtensions": [
+			"ts",
+			"js"
+		],
+		"rootDir": "src",
+		"testRegex": ".spec.ts$",
+		"transform": {
+			"^.+\\.(t|j)s$": "@swc/jest"
+		},
+		"testEnvironment": "node"
+	}
+}
